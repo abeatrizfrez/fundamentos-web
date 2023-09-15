@@ -1,0 +1,48 @@
+@import url(fonts.css);
+@import url(reset.css);
+
+/* HEADER NAV */
+
+#nav-header {
+    width: 100vw;
+    height: 60px;
+    padding-top: 15px;
+    box-sizing: border-box;
+    background-color: rgb(101, 101, 101);
+    text-transform: uppercase;
+    display: flex;
+    justify-content: space-around;
+}
+
+#nav-header h1 {
+    display: inline;
+    color: #fff;
+    font-family: 'Varela', Arial, Helvetica, sans-serif;
+}
+
+#nav-header li {
+    display: inline;
+}
+
+#nav-header a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+#nav-header a:hover {
+    background-color: green;
+    text-decoration: none;
+}
+
+
+#nav-header nav {
+    display: inline-block;
+}
+
+/* HEADER DIV */
+
+header div{
+    background-color: rgb(32, 32, 32);
+}
+
