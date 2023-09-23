@@ -11,7 +11,7 @@ header, main, .retornar {
 }
 
 .border-input {
-    border: 2px groove #c0c0c0;
+    border: 1px groove #c0c0c0;
 }
 
 .border-button button {
@@ -62,13 +62,8 @@ h2 {
 
 /* FORMULARIO */
 
-.formulario {
-    width: 700px;
-    margin-bottom: 50px;
-}
-
 .bloco-formulario {
-    border: 2px groove #c0c0c0;
+    border: 1px groove #c0c0c0;
     padding: 5px 0;
 }
 
@@ -149,6 +144,11 @@ td {
 
 /* HTML CONTATOS */
 
+.formulario-contatos {
+    width: 700px;
+    margin-bottom: 50px;
+}
+
 .tabela-formulario-contatos {
     margin-left: 20%;
 }
@@ -161,6 +161,7 @@ td {
 
 .formulario-livros {
     width: 900px;
+    margin-bottom: 50px;
 }
 
 .textarea-formulario-livros {
