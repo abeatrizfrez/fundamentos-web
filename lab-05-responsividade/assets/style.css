@@ -65,7 +65,6 @@ main {
 
 /* SECTION 1 */
 
-
 .banner {
     padding: 20px 20px 0;
 }
@@ -241,7 +240,7 @@ footer ul li a {
     font-size: 20px;
 }
 
-/* Medium devices (landscape tablets, 768px and up) */
+/* Medium devices (landscape tablets, 1199px and up) */
 @media only screen and (max-width: 1199px) {
 
     body {
@@ -310,7 +309,7 @@ footer ul li a {
 
     .comments blockquote {
         margin: 0;
-        width: 25vw;
+        width: 50vw;
         max-width: 250px;
     }
 
@@ -421,7 +420,7 @@ footer ul li a {
 
     .portfolio {
         padding: 0;
-        margin: 10px 0;
+        margin: 20px 0;
         gap: 10px;
         display: grid;
         grid-template-columns: 1fr;
@@ -459,6 +458,7 @@ footer ul li a {
     /* MENU CONTAINER 3 */
 
     .testimonials {
+        gap: 20px;
         padding: 0;
         flex-direction: column;
     }
@@ -476,7 +476,7 @@ footer ul li a {
 
     .testimonials img {
         width: 90vw;
-        height: 35vh;
+        height: 30vh;
     }
 
     .testimonials article:first-child {
@@ -498,18 +498,21 @@ footer ul li a {
     /* MENU CONTAINER 3.2 */
 
     .comments {
+        width: 90vw;
         margin: 10px auto;
         display: flex;
         flex-direction: column;
         flex-wrap: wrap;
         align-content: center;
+        padding: 20px 20px 10px;
     }
 
-    blockquote {
+    .comments blockquote {
         background-color: #bfeeff;
         font-style: italic;
-        width: 80vw;
-        padding: 20px 20px 30px;
+        width: 350px;
+        max-width: 80vw;
+        
     }
 
     .comments-style {
