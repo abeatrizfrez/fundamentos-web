@@ -112,23 +112,6 @@
 						<button id="q1_executa">Adicionar</button>
 					</p>
 					<p id="q1_resposta"></p>
-					<table>
-						<tr>
-							<th></th>
-							<th>Homens</th>
-							<th>Mulheres</th>
-						</tr>
-						<tr>
-							<th>Participantes</th>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-						<tr>
-							<th>Altura Média (m)</th>
-							<td>0</td>
-							<td>0</td>
-						</tr>
-					</table>
 				</fieldset>
 
 			</li>
@@ -226,47 +209,49 @@
 		let bt_questao4_cinza = document.getElementById("q4_cinza");
 		let bt_questao5 = document.getElementById("q5_executa");
 
+		let alturaH = [];
+		let alturaM = [];
 
 		let resposta1 = () => {
-			let pessoas = [];
-			document.querySelector("#q1_executa").addEventListener("click", () => {
-				adicionarPessoa();
-			})
+			let sexo = document.getElementById("q1_sexo").value;
+			let altura = parseFloat(document.getElementById("q1_altura").value);
 
-			function adicionarPessoa() {
-				var sexo = document.getElementById("q1_sexo").value;
-				var altura = parseFloat(document.getElementById("q1_altura").value);
-
-				pessoas.push({ sexo, altura });
-
-				atualizarDOM()
+			if (isNaN(altura)) {
+				alert("Por favor, digite uma altura válida.");
+				return;
 			}
 
-			function atualizarDOM() {
-				if (!pessoas.length) {
-					return;
-				}
-
-				const homens = pessoas.filter((obj) => { return obj.sexo == "M"; });
-				const mulheres = pessoas.filter((obj) => { return obj.sexo == "F"; });
-
-				const mediaAlturaH = homens.reduce((total, obj) => {
-					return total + obj.altura;
-				}, 0) / homens.length;
-
-
-				const mediaAlturaM = mulheres.reduce((total, obj) => {
-					return total + obj.altura;
-				}, 0) / mulheres.length;
-
-
-				let participantesHomens = document.querySelector("body > main > ol > li:nth-child(1) > fieldset > table > tbody > tr:nth-child(2) > td:nth-child(2)").innerHTML = homens.length;
-				let participantesMulheres = document.querySelector("body > main > ol > li:nth-child(1) > fieldset > table > tbody > tr:nth-child(2) > td:nth-child(3)").innerHTML = mulheres.length;
-
-				let alturaMediaHomens = document.querySelector("body > main > ol > li:nth-child(1) > fieldset > table > tbody > tr:nth-child(3) > td:nth-child(2)").innerHTML = !mediaAlturaH ? 0 : mediaAlturaH.toPrecision(3);
-				let alturaMediaMulheres = document.querySelector("body > main > ol > li:nth-child(1) > fieldset > table > tbody > tr:nth-child(3) > td:nth-child(3)").innerHTML = !mediaAlturaM ? 0 : mediaAlturaM.toPrecision(3);
+			if (sexo === "M") {
+				alturaH.push(altura);
+			} else if (sexo === "F") {
+				alturaM.push(altura);
+			} else {
+				alert("Por favor, selecione o sexo corretamente.");
+				return;
 			}
-		}
+
+			let mediaH = alturaH.reduce((acc, cur) => acc + cur, 0) / alturaH.length;
+			let mediaM = alturaM.reduce((acc, cur) => acc + cur, 0) / alturaM.length;
+
+			document.getElementById("q1_resposta").innerHTML = `
+			<table>
+				<tr>
+					<th></th>
+					<th>Homens</th>
+					<th>Mulheres</th>
+				</tr>
+				<tr>
+					<th>Participantes</th>
+					<td>${alturaH.length}</td>
+					<td>${alturaM.length}</td>
+				</tr>
+				<tr>
+					<th>Altura Média (m)</th>
+					<td>${mediaH.toFixed(2)}</td>
+					<td>${mediaM.toFixed(2)}</td>
+				</tr>
+			</table>`;
+		};
 
 		let resposta2 = () => {
 			document.getElementById("q2_executa").addEventListener("click", () => {
@@ -288,73 +273,56 @@
 			}
 		}
 
+		let nomes = [];
+
 		let resposta3_add = () => {
-			let alunos = [];
-					document.getElementById("q3_adicionar").addEventListener('click', function () {
-						alunos.push(document.getElementById("q3_nome").value);
-						console.log(" oi");
+			let novoNome = document.getElementById("q3_nome").value.trim();
 
-						document.querySelector("#q3_lista").innerHTML = ""
+			if (novoNome === "") {
+				alert("Digite um nome válido.");
+				return;
+			}
 
-						adicionarPessoas()
-					});
-
-					function ordenaLista(ordem) {
-						if (ordem == "asc") {
-							return alunos.sort();
-						} else if (ordem == "desc") {
-							return alunos.sort().reverse();
-						}
-					}
-
-					function adicionarPessoas() {
-						const listaAlunos = document.querySelector("#q3_lista");
-
-						for (let i in alunos) {
-							const li = document.createElement("LI");
-							li.innerHTML = alunos[i];
-							listaAlunos.appendChild(li);
-						}
-					}
-
-					
-
-					
-		}
+			nomes.push(novoNome);
+			atualizaListaNomes();
+		};
 
 		let resposta3_ordena_asc = () => {
-			document.getElementById("q3_ord_asc").addEventListener('click', function () {
-						document.getElementById("q3_lista").innerHTML = ordenaLista("asc");
-					})
-			
-		}
+			nomes.sort();
+			atualizaListaNomes();
+		};
 
 		let resposta3_ordena_desc = () => {
-			document.getElementById("q3_ord_desc").addEventListener('click', function () {
-						document.getElementById("q3_lista").innerHTML = ordenaLista("desc");
-					})
-			
-		}
+			nomes.sort((a, b) => b.localeCompare(a));
+			atualizaListaNomes();
+		};
+
+		let atualizaListaNomes = () => {
+			let listaNomes = document.getElementById("q3_lista");
+			listaNomes.innerHTML = "";
+
+			nomes.forEach((nome) => {
+				let li = document.createElement("li");
+				li.textContent = nome;
+				listaNomes.appendChild(li);
+			});
+		};
 
 		let resposta4_azul = () => {
-			const main = document.querySelector("body > main");
-			document.getElementById("q4_azul").addEventListener('click', function () { main.style.backgroundColor = "blue" });
-		}
+			document.body.style.backgroundColor = "blue";
+		};
 
 		let resposta4_branco = () => {
-			const main = document.querySelector("body > main");
-			document.getElementById('q4_branco').addEventListener("click", function () { main.style.backgroundColor = "white" });
-		}
+			document.body.style.backgroundColor = "white";
+		};
 
 		let resposta4_verde = () => {
-			const main = document.querySelector("body > main");
-			document.getElementById('q4_verde').addEventListener("click", function () { main.style.backgroundColor = "green" });
-		}
+			document.body.style.backgroundColor = "green";
+		};
 
 		let resposta4_cinza = () => {
-			const main = document.querySelector("body > main");
-			document.getElementById('q4_cinza').addEventListener("click", function () { main.style.backgroundColor = "gray" });
-		}
+			document.body.style.backgroundColor = "gray";
+		};
 
 		let resposta5 = () => {
 			let texto = document.getElementById("questao5_texto");
@@ -374,8 +342,7 @@
 			texto.innerHTML = textoOriginal;
 
 			document.getElementById("q5_resposta").innerHTML = `O termo "${palavra}" aparece ${cont} vezes.`;
-		}
-		
+		}		
 
 		//Atribuindo o evento click dos botões às funções acima
 		bt_questao1.addEventListener("click", resposta1, false);
@@ -388,7 +355,6 @@
 		bt_questao4_verde.addEventListener("click", resposta4_verde, false);
 		bt_questao4_cinza.addEventListener("click", resposta4_cinza, false);
 		bt_questao5.addEventListener("click", resposta5, false);
-
 
 	</script>
 </body>
