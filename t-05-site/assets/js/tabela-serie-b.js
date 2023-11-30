@@ -1,6 +1,6 @@
 var myHeaders = new Headers();
-myHeaders.append("x-rapidapi-key", "78b347a494mshc4f8986182b3754p1030eajsn836d495118e0");
-myHeaders.append("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
+myHeaders.append("x-rapidapi-key", "5b4e68c8328830ffe84cb2472a09cdef");
+myHeaders.append("x-rapidapi-host", "v3.football.api-sports.io");
 
 var requestOptions = {
     method: 'GET',
@@ -8,7 +8,7 @@ var requestOptions = {
     redirect: 'follow'
 };
 
-fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=72", requestOptions)
+fetch("https://v3.football.api-sports.io/standings?season=2023&league=72", requestOptions)
     .then(response => response.json())
     .then(data => {
         var container = document.getElementById("tabela");
@@ -31,41 +31,45 @@ fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=72
         
         var tbody = document.createElement("tbody");
 
-        data.response[0].league.standings[0].forEach(teamStanding => {
-            var row = document.createElement("tr");
+        if (data.response && data.response[0] && data.response[0].league && data.response[0].league.standings[0]) {
+                data.response[0].league.standings[0].forEach(teamStanding => {
+                var row = document.createElement("tr");
 
-            var rowData = [
-                teamStanding.rank,
-                teamStanding.team.logo,
-                teamStanding.team.name,
-                teamStanding.points,
-                teamStanding.all.played,
-                teamStanding.all.win,
-                teamStanding.all.draw,
-                teamStanding.all.lose,
-                teamStanding.all.goals.for,
-                teamStanding.all.goals.against,
-                teamStanding.goalsDiff,
-            ];
+                var rowData = [
+                    teamStanding.rank,
+                    teamStanding.team.logo,
+                    teamStanding.team.name,
+                    teamStanding.points,
+                    teamStanding.all.played,
+                    teamStanding.all.win,
+                    teamStanding.all.draw,
+                    teamStanding.all.lose,
+                    teamStanding.all.goals.for,
+                    teamStanding.all.goals.against,
+                    teamStanding.goalsDiff,
+                ];
 
-            rowData.forEach((text, index) => {
-                var cell = document.createElement("td");
+                rowData.forEach((text, index) => {
+                    var cell = document.createElement("td");
 
-                if (index === 1) {
-                    var logoImg = document.createElement("img");
-                    logoImg.src = text;
-                    logoImg.alt = teamStanding.team.name;
-                    logoImg.height = 25;
-                    logoImg.width = 25;
-                    cell.appendChild(logoImg);
-                } else {
-                    cell.textContent = text;
-                }
-                row.appendChild(cell);
+                    if (index === 1) {
+                        var logoImg = document.createElement("img");
+                        logoImg.src = text;
+                        logoImg.alt = teamStanding.team.name;
+                        logoImg.height = 25;
+                        logoImg.width = 25;
+                        cell.appendChild(logoImg);
+                    } else {
+                        cell.textContent = text;
+                    }
+                    row.appendChild(cell);
+                });
+                tbody.appendChild(row);
             });
-            tbody.appendChild(row);
-        });
-        table.appendChild(tbody);
-        container.appendChild(table);
+        } else {
+            console.log('Dados da liga não encontrados no formato esperado.');
+        }
+    table.appendChild(tbody);
+    container.appendChild(table);
     })
     .catch(error => console.log('error', error));

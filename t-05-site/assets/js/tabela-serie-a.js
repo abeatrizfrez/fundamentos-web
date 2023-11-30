@@ -32,44 +32,44 @@ fetch("https://v3.football.api-sports.io/standings?season=2023&league=71", reque
         var tbody = document.createElement("tbody");
 
         if (data.response && data.response[0] && data.response[0].league && data.response[0].league.standings[0]) {
-            data.response[0].league.standings[0].forEach(teamStanding => {
-            var row = document.createElement("tr");
+                data.response[0].league.standings[0].forEach(teamStanding => {
+                var row = document.createElement("tr");
 
-            var rowData = [
-                teamStanding.rank,
-                teamStanding.team.logo,
-                teamStanding.team.name,
-                teamStanding.points,
-                teamStanding.all.played,
-                teamStanding.all.win,
-                teamStanding.all.draw,
-                teamStanding.all.lose,
-                teamStanding.all.goals.for,
-                teamStanding.all.goals.against,
-                teamStanding.goalsDiff,
-            ];
+                var rowData = [
+                    teamStanding.rank,
+                    teamStanding.team.logo,
+                    teamStanding.team.name,
+                    teamStanding.points,
+                    teamStanding.all.played,
+                    teamStanding.all.win,
+                    teamStanding.all.draw,
+                    teamStanding.all.lose,
+                    teamStanding.all.goals.for,
+                    teamStanding.all.goals.against,
+                    teamStanding.goalsDiff,
+                ];
 
-            rowData.forEach((text, index) => {
-                var cell = document.createElement("td");
+                rowData.forEach((text, index) => {
+                    var cell = document.createElement("td");
 
-                if (index === 1) {
-                    var logoImg = document.createElement("img");
-                    logoImg.src = text;
-                    logoImg.alt = teamStanding.team.name;
-                    logoImg.height = 25;
-                    logoImg.width = 25;
-                    cell.appendChild(logoImg);
-                } else {
-                    cell.textContent = text;
-                }
-                row.appendChild(cell);
+                    if (index === 1) {
+                        var logoImg = document.createElement("img");
+                        logoImg.src = text;
+                        logoImg.alt = teamStanding.team.name;
+                        logoImg.height = 25;
+                        logoImg.width = 25;
+                        cell.appendChild(logoImg);
+                    } else {
+                        cell.textContent = text;
+                    }
+                    row.appendChild(cell);
+                });
+                tbody.appendChild(row);
             });
-            tbody.appendChild(row);
-        });
         } else {
             console.log('Dados da liga não encontrados no formato esperado.');
         }
-        table.appendChild(tbody);
-        container.appendChild(table);
+    table.appendChild(tbody);
+    container.appendChild(table);
     })
     .catch(error => console.log('error', error));
