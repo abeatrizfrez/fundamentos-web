@@ -1,6 +1,6 @@
 var myHeaders = new Headers();
-myHeaders.append("x-rapidapi-key", "78b347a494mshc4f8986182b3754p1030eajsn836d495118e0");
-myHeaders.append("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
+myHeaders.append("x-rapidapi-key", "5b4e68c8328830ffe84cb2472a09cdef");
+myHeaders.append("x-rapidapi-host", "v3.football.api-sports.io");
 
 var requestOptions = {
     method: 'GET',
@@ -8,7 +8,7 @@ var requestOptions = {
     redirect: 'follow'
 };
 
-fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=71", requestOptions)
+fetch("https://v3.football.api-sports.io/standings?season=2023&league=71", requestOptions)
     .then(response => response.json())
     .then(data => {
         var container = document.getElementById("tabela");
@@ -31,7 +31,8 @@ fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=71
         
         var tbody = document.createElement("tbody");
 
-        data.response[0].league.standings[0].forEach(teamStanding => {
+        if (data.response && data.response[0] && data.response[0].league && data.response[0].league.standings[0]) {
+            data.response[0].league.standings[0].forEach(teamStanding => {
             var row = document.createElement("tr");
 
             var rowData = [
@@ -65,6 +66,9 @@ fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=71
             });
             tbody.appendChild(row);
         });
+        } else {
+            console.log('Dados da liga não encontrados no formato esperado.');
+        }
         table.appendChild(tbody);
         container.appendChild(table);
     })
