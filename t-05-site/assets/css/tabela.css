@@ -106,7 +106,7 @@ tbody tr td:nth-child(2n + 4) {
 @media (min-width: 576px) {
 
     #main-titulo {
-        margin: 8% 0 0 5%;
+        margin: 50px 0 0 5%;
     }
 
     .nav-top-titulo {

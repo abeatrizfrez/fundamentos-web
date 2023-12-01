@@ -1,6 +1,6 @@
 var myHeaders = new Headers();
 myHeaders.append("x-rapidapi-key", "78b347a494mshc4f8986182b3754p1030eajsn836d495118e0");
-myHeaders.append("x-rapidapi-host", "v3.football.api-sports.io");
+myHeaders.append("x-rapidapi-host", "api-football-v1.p.rapidapi.com");
 
 var requestOptions = {
     method: 'GET',
@@ -8,7 +8,7 @@ var requestOptions = {
     redirect: 'follow'
 };
 
-fetch("https://v3.football.api-sports.io/standings?season=2023&league=72", requestOptions)
+fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=72", requestOptions)
     .then(response => response.json())
     .then(data => {
         var container = document.getElementById("tabela");
@@ -31,55 +31,50 @@ fetch("https://v3.football.api-sports.io/standings?season=2023&league=72", reque
         
         var tbody = document.createElement("tbody");
 
-        if (data.response && data.response[0] && data.response[0].league && data.response[0].league.standings[0]) {
-                data.response[0].league.standings[0].forEach(teamStanding => {
-                var row = document.createElement("tr");
+        data.response[0].league.standings[0].forEach(teamStanding => {
+            var row = document.createElement("tr");
 
-                var rowData = [
-                    teamStanding.rank,
-                    teamStanding.team.logo,
-                    teamStanding.team.name,
-                    teamStanding.points,
-                    teamStanding.all.played,
-                    teamStanding.all.win,
-                    teamStanding.all.draw,
-                    teamStanding.all.lose,
-                    teamStanding.all.goals.for,
-                    teamStanding.all.goals.against,
-                    teamStanding.goalsDiff,
-                ];
+            var rowData = [
+                teamStanding.rank,
+                teamStanding.team.logo,
+                teamStanding.team.name,
+                teamStanding.points,
+                teamStanding.all.played,
+                teamStanding.all.win,
+                teamStanding.all.draw,
+                teamStanding.all.lose,
+                teamStanding.all.goals.for,
+                teamStanding.all.goals.against,
+                teamStanding.goalsDiff,
+            ];
 
-                rowData.forEach((text, index) => {
-                    var cell = document.createElement("td");
+            rowData.forEach((text, index) => {
+                var cell = document.createElement("td");
 
-                    if (index === 1) {
-                        var logoImg = document.createElement("img");
-                        logoImg.src = text;
-                        logoImg.alt = teamStanding.team.name;
-                        logoImg.height = 25;
-                        logoImg.width = 25;
-                        cell.appendChild(logoImg);
+                if (index === 1) {
+                    var logoImg = document.createElement("img");
+                    logoImg.src = text;
+                    logoImg.alt = teamStanding.team.name;
+                    logoImg.height = 25;
+                    logoImg.width = 25;
+                    cell.appendChild(logoImg);
+                } else {
+                    cell.textContent = text;
+                }
+                if (index === 0) {
+                    if (teamStanding.rank <= 4) {
+                        cell.classList.add("promocao");
+                    }
+                    else if (teamStanding.rank >= 17 && teamStanding.rank <= 20) {
+                        cell.classList.add("rebaixamento");
                     } else {
-                        cell.textContent = text;
+                        cell.classList.add("nada");
                     }
-                    if (index === 0) {
-                        if (teamStanding.rank <= 4) {
-                            cell.classList.add("promocao");
-                        }
-                        else if (teamStanding.rank >= 17 && teamStanding.rank <= 20) {
-                            cell.classList.add("rebaixamento");
-                        } else {
-                            cell.classList.add("nada");
-                        }
-                    }
-                    row.appendChild(cell);
-                });
-                tbody.appendChild(row);
+                }
+                row.appendChild(cell);
             });
-        } else {
-            console.log('Dados da liga não encontrados no formato esperado.');
-        }
-    table.appendChild(tbody);
-    container.appendChild(table);
+            tbody.appendChild(row);
+        });
+        table.appendChild(tbody);
+        container.appendChild(table);
     })
-    .catch(error => console.log('error', error));

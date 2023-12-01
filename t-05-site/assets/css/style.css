@@ -22,7 +22,7 @@ body {
 }
 
 .nav-top-titulo {
-  margin: 0 20px;
+  margin: 0 0 0 20px;
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: 2px;
@@ -320,6 +320,7 @@ footer {
 
 footer img {
   width: 5%;
+  max-width: 80px;
   padding-top: 20px;
   display: block;
   margin: auto;
@@ -353,38 +354,54 @@ footer p a:hover {
     width: 19px;
 }
 
-.nav-top-titulo {
-  text-align: center;
-  font-size: 2rem;
-}
+  .nav-top-titulo {
+    text-align: center;
+    font-size: 2rem;
+  }
 
-#wrapper {
-  justify-content: center;
-}
+  #wrapper {
+    justify-content: center;
+  }
 
-#main-titulo {
-  font-size: 2rem;
-}
+  #main-titulo {
+    font-size: 2rem;
+    margin: 5% !important;
+    text-align: left;
+  }
 
-header picture {
-  display: none;
-}
+  .section-medias iframe {
+    height: 500px;
+  }
 
-#main-titulo {
-  margin: 5% !important;
-  text-align: left;
-}
+  header picture {
+    display: none;
+  }
+
+  footer img {
+    width: 10%;
+    padding: 15px 0;
+  }
+
+  footer p {
+    display: none;
+  }
 
 }
 
 /* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) { 
+@media (min-width: 576px) {
+
+  .nav-top-titulo {
+    text-align: center;
+  }
+
   .section {
     padding: 0 50px;
   }
 
-  iframe {
+  .section-medias iframe {
     width: 100%;
+    height: 500px;
   }
 
   .section-medias {
@@ -427,11 +444,6 @@ header picture {
   footer p {
     display: none;
   }
-
-}
-
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
 
 }
 
@@ -488,20 +500,20 @@ header picture {
     gap: 20px;
   }
 
-  iframe {
-    height: 500px;
+  .section-medias iframe {
+    height: 400px;
   }
 
   .section-medias-images2 .img1 {
-    max-height: 300px;
+    height: 210px;
   }
   
   .section-medias-images2 .img2 {
-    max-height: 300px;
+    height: 170px;
   }
   
   .section-medias-images .img3 {
-    max-height: 500px;
+    height: 400px;
   }
 
   footer img {
@@ -513,4 +525,22 @@ header picture {
     display: block;
   }
 
+}
+
+@media (min-width: 1400px) {
+  .section-medias iframe {
+    height: 480px;
+  }
+
+  .section-medias-images2 .img1 {
+    height: 250px;
+  }
+
+  .section-medias-images2 .img2 {
+    height: 210px;
+  }
+
+  .section-medias-images .img3 {
+    height: 480px;
+  }
 }

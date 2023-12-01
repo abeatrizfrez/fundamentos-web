@@ -12,16 +12,20 @@ fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=71
     .then(response => response.json())
     .then(data => {
         var container = document.getElementById("tabela");
+
         var table = document.createElement("table");
         table.classList.add("tabela"); 
+
         var thead = document.createElement("thead");
         var headerRow = document.createElement("tr");
+
         var headers = ["", "Clube", "", "Pts", "PJ", "VIT", "E", "DER", "GM", "GC", "SG"];
         headers.forEach(headerText => {
             var th = document.createElement("th");
             th.textContent = headerText;
             headerRow.appendChild(th);
         });
+
         thead.appendChild(headerRow);
         table.appendChild(thead);
 
@@ -43,8 +47,10 @@ fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=71
                 teamStanding.all.goals.against,
                 teamStanding.goalsDiff,
             ];
+
             rowData.forEach((text, index) => {
                 var cell = document.createElement("td");
+
                 if (index === 1) {
                     var logoImg = document.createElement("img");
                     logoImg.src = text;
