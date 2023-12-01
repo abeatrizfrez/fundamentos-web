@@ -344,59 +344,13 @@ footer p a:hover {
   color: #fff;
 }
 
-/* X-Small devices (portrait phones, less than 576px) */
-@media (max-width: 575px) {
-
-  .hamburger {
-    padding: 0;
-    background: transparent;
-    border: none;
-    display: block;
-    height: 27px;
-    top: 25px;
-    position: sticky;
-    width: 19px;
-}
-
-  .nav-top-titulo {
-    text-align: center;
-    font-size: 2rem;
-  }
-
-  #wrapper {
-    justify-content: center;
-  }
-
-  #main-titulo {
-    font-size: 2rem;
-    margin: 5% !important;
-    text-align: left;
-  }
-
-  .section-medias iframe {
-    height: 500px;
-  }
-
-  header picture {
-    display: none;
-  }
-
-  footer img {
-    width: 10%;
-    padding: 15px 0;
-  }
-
-  footer p {
-    display: none;
-  }
-
-}
-
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) {
 
   .nav-top-titulo {
     text-align: center;
+    font-size: 4.5rem;
+    padding: 30px 0;
   }
 
   .section {
