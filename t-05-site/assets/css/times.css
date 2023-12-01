@@ -25,3 +25,21 @@ p {
     font-size: 1.8rem;
     max-width: 150px;
 }
+
+@media (max-width: 991px) {
+    #times {
+        padding: 0 20px;
+    }
+}
+
+@media (min-width: 992px) { 
+    #times {
+        padding: 0 80px;
+    }
+}
+
+@media (min-width: 1200px) { 
+    #times {
+        padding: 0 150px;
+    }
+}

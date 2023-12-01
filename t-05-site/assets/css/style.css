@@ -302,6 +302,10 @@ figcaption {
   font-size: 1.2rem;
 }
 
+iframe {
+  border: 0;
+}
+
 .main-img {
   display: flex;
   justify-content: center;
