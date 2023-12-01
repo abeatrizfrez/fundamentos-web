@@ -366,6 +366,15 @@ footer p a:hover {
   font-size: 2rem;
 }
 
+header picture {
+  display: none;
+}
+
+#main-titulo {
+  margin: 5% !important;
+  text-align: left;
+}
+
 }
 
 /* Small devices (landscape phones, 576px and up) */
