@@ -11,7 +11,7 @@ var requestOptions = {
 fetch("https://api-football-v1.p.rapidapi.com/v3/teams?league=71&season=2023", requestOptions)
     .then(response => response.json())
     .then(data => {
-        var container = document.getElementById("times-serie-a");
+        var container = document.getElementById("times");
 
         data.response.forEach(teamData => {
             var team = teamData.team;

@@ -1,0 +1,27 @@
+@import url('style.css');
+
+#main-titulo {
+    margin: 50px 0 50px 250px;
+}
+
+#times {
+    margin: 50px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+}
+
+.time {
+    text-align: center;
+    padding: 15px;
+    border: 1px solid #009b558c;
+    border-radius: 5px;
+}
+
+p {
+    margin: 15px 0 0;
+    font-weight: 600;
+    font-size: 1.8rem;
+    max-width: 150px;
+}

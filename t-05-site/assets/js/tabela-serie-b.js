@@ -1,5 +1,5 @@
 var myHeaders = new Headers();
-myHeaders.append("x-rapidapi-key", "5b4e68c8328830ffe84cb2472a09cdef");
+myHeaders.append("x-rapidapi-key", "78b347a494mshc4f8986182b3754p1030eajsn836d495118e0");
 myHeaders.append("x-rapidapi-host", "v3.football.api-sports.io");
 
 var requestOptions = {
@@ -61,6 +61,16 @@ fetch("https://v3.football.api-sports.io/standings?season=2023&league=72", reque
                         cell.appendChild(logoImg);
                     } else {
                         cell.textContent = text;
+                    }
+                    if (index === 0) {
+                        if (teamStanding.rank <= 4) {
+                            cell.classList.add("promocao");
+                        }
+                        else if (teamStanding.rank >= 17 && teamStanding.rank <= 20) {
+                            cell.classList.add("rebaixamento");
+                        } else {
+                            cell.classList.add("nada");
+                        }
                     }
                     row.appendChild(cell);
                 });
