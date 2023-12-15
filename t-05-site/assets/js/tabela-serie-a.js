@@ -61,14 +61,18 @@ fetch("https://api-football-v1.p.rapidapi.com/v3/standings?season=2023&league=71
                 } else {
                     cell.textContent = text;
                 }
+
+                var vencedorLibertadores = 'Fluminense';
+                var vencedorCopaDoBrasil = 'Sao Paulo';
+
                 if (index === 0) {
-                    if (teamStanding.rank <= 4) {
+                    if (teamStanding.rank <= 4 || teamStanding.team.name == vencedorLibertadores || teamStanding.team.name == vencedorCopaDoBrasil) {
                         cell.classList.add("libertadores");
                     }
                     else if (teamStanding.rank >= 5 && teamStanding.rank <= 6) {
                         cell.classList.add("qualificatorias-libertadores");
                     }
-                    else if (teamStanding.rank >= 7 && teamStanding.rank <= 12) {
+                    else if (teamStanding.rank >= 7 && teamStanding.rank <= 14) {
                         cell.classList.add("sulamericana");
                     }
                     else if (teamStanding.rank >= 17 && teamStanding.rank <= 20) {
